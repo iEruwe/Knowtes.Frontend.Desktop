@@ -23,6 +23,32 @@ namespace Knowtes.Frontend.Desktop
         public MainWindow()
         {
             InitializeComponent();
+            if (Properties.Settings.Default.Appearance == 0)
+            {
+                Background = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+                MessageBox.Show("Appearance is light");
+            }
+            else
+            {
+                Background = new SolidColorBrush(Color.FromRgb(100, 100, 100));
+                MessageBox.Show("Appearance is dark");
+            }
+        }
+
+        private void Apply_Click(object sender, RoutedEventArgs e)
+        {
+            if ((bool)Dark.IsChecked)
+            {
+                Properties.Settings.Default.Appearance = 1;
+            }
+            else if ((bool)Light.IsChecked)
+            {
+                Properties.Settings.Default.Appearance = 0;
+            }
+
+            MessageBox.Show("Перезапустите приложение для применения настроек.");
+
+            Properties.Settings.Default.Save();
         }
     }
 }
